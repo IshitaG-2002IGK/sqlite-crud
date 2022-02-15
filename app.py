@@ -15,18 +15,13 @@ try :
 
     cursor = con.cursor()
 
-    cursor.execute( "DROP TABLE IF EXISTS MUSEUM")
+    # cursor.execute( "DROP TABLE IF EXISTS MUSEUM")
 
-    query = """ (CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25),COUNTRY CHAR (20) NOT NULL)"""
+    # query = """ (CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25),COUNTRY CHAR (20) NOT NULL)"""
 
+    con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
 
-# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
-
-# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(2, 'Le Louvre', 'Paris')")
-
-# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
-
-# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
+    con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(2, 'Le Louvre', 'Paris')")
 
 
     con.commit()
@@ -37,3 +32,7 @@ except :
     con.rollback()
 
 con.close()
+
+
+if __name__ == '__main__':
+    app.run(host="0.0.0.0", debug = True)       

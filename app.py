@@ -11,23 +11,29 @@ import json
 
 con = sqlite3.connect("museum.db")
 
-cursor = con.cursor()
+try :
 
-cursor.execute( "DROP TABLE IF EXISTS MUSEUM")
+    cursor = con.cursor()
 
-query = """ (CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25),COUNTRY CHAR (20) NOT NULL)"""
+    cursor.execute( "DROP TABLE IF EXISTS MUSEUM")
 
-con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
+    query = """ (CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25),COUNTRY CHAR (20) NOT NULL)"""
 
-con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(2, 'Le Louvre', 'Paris')")
+
+# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
+
+# con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(2, 'Le Louvre', 'Paris')")
 
 # con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
 
 # con.execute("INSERT INTO MUSEUM(ID, NAME, COUNTRY)""VALUES(1, 'Smith Institution', 'Washington')")
 
 
-con.commit()
+    con.commit()
+    print("DONE")
+
+except :
+    print("ERROR")
+    con.rollback()
 
 con.close()
-
-

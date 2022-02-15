@@ -27,6 +27,13 @@ def create_connection():
 
         con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(2, 'Le Louvre', 'Paris');''')
 
+        con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(3, 'Americano', 'Slyvia');''')
+
+        con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(4, 'LA museum', 'LA');''')
+
+        cursor = con.execute("SELECT * FROM DATABASE")
+
+        print(cursor.fetchall())
 
         con.commit()
         print("success")

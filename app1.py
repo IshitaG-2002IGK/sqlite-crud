@@ -10,18 +10,13 @@ import json
 import sqlite3
 from sqlite3 import Error
 
+DB = "museum.db"
+
 def create_connection():
 
-    con=sqlite3.connect('museum.db')
     try:
 
-        cursor= con.cursor()
-
-        cursor.execute("DROP TABLE IF EXISTS DATABASE")
-
-        query= """CREATE TABLE DATABASE (ID INT PRIMARY KEY NOT NULL, NAME CHAR(25) NOT NULL, COUNTRY CHAR(20) NOT NULL);"""
-
-        con.execute(query)
+        
 
         con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(1, 'Smithsonian Institution', 'Washington');''')
 
@@ -30,6 +25,8 @@ def create_connection():
         con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(3, 'Americano', 'Slyvia');''')
 
         con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(4, 'LA museum', 'LA');''')
+
+        con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(5, 'Yola Amoeba', 'Zulu');''')
 
         cursor = con.execute("SELECT * FROM DATABASE")
 
@@ -60,18 +57,50 @@ def create_connection():
     return None
 
 
-# print("success")
+def create_table(DB):
 
-# places_query = "insert into museum(id,museum name, country,)"
+    try :
 
-# def start():
+        con = sqlite3.connect('museum.db')
 
-# ''' INSERT INTO CITY (NAME, STATE) 
-#             VALUES (:name, :state) '''
+        return con
+    
+    except Error as e:
 
+        print(e)
+
+    return None  
+
+        # cursor= con.cursor()
+
+        # cursor.execute("DROP TABLE IF EXISTS DATABASE")
+
+        # query= """CREATE TABLE DATABASE (ID INT PRIMARY KEY NOT NULL, NAME CHAR(25) NOT NULL, COUNTRY CHAR(20) NOT NULL);"""
+
+        # con.execute(query)
+
+        # create_connection()
+
+
+
+def add_table(con):
+    con.execute("ADD")
 
 def startpy():
-    create_connection()
+
+    con = create_table(DB)
+
+    with con :
+        
+        data = {
+
+            'ID'     : 1,
+            'NAME'   : 'Smithsonian Institution',
+            'COUNTRY': 'Washington'
+        }
+
+        result = add_table()
+    
 
 
 if __name__== "__main__":

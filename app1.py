@@ -35,13 +35,26 @@ def create_connection():
 
         print(cursor.fetchall())
 
+        con.execute ("DELETE FROM DATABASE WHERE ID = 1; ")
+
+        print(cursor.fetchall())
+
+        con.execute("UPDATE DATABASE SET NAME = 'Jolly museum' WHERE ID = 3; ")
+
+        print(cursor.fetchall())
+
+
         con.commit()
         print("success")
 
     except Error as e:
+
         print(e)
+
         print("ERROR")
+
         con.rollback()
+
     con.close()
     
     return None

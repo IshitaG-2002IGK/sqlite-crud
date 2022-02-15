@@ -6,47 +6,47 @@ Source:
     
 '''
 
+import json
 import sqlite3
-import random
 from sqlite3 import Error
 
-database = "test.db"
+def create_connection():
 
-def start():
-    """
-    Query all rows in the CITY table
-    :param conn: the Connection object
-    :return:
-    """    
-    conn = None
-    
+    con=sqlite3.connect('museum.db')
     try:
-        conn = sqlite3.connect(database)        
+
+        cursor= con.cursor()
+        cursor.execute("DROP TABLE IF EXISTS MUSEUM")
+        query= """CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25) NOT NULL, COUNTRY CHAR(20) NOT NULL);"""
+
+
+        con.execute('''INSERT INTO MUSEUM (ID, NAME, COUNTRY) VALUES(1, 'Smithsonian Institution', 'Washington');''')
+
+        con.execute('''INSERT INTO MUSEUM (ID, NAME, COUNTRY) VALUES(2, 'Le Louvre', 'Paris');''')
+
+
+        con.commit()
+        print("success")
+
     except Error as e:
-        print(e) 
-        return
+        print(e)
+        print("ERROR")
+        con.rollback()
+    con.close()
     
-    sql = ''' INSERT INTO CITY (NAME, STATE) 
-            VALUES (:name, :state) '''
-    cur = conn.cursor()
-    
-    city_obj = {
-        'name' : 'Toronto',
-        'state' : 'ON'
-    }
-    
-    created_id = -1
-    try:
-        cur.execute(sql, city_obj)
-        
-        created_id = cur.lastrowid
-    except sqlite3.IntegrityError as sqle:
-        print("SQLite error : {0}".format(sqle))
-    finally:
-        #print('clean up')
-        conn.commit()
-    
-    print('created id : '+str(created_id))
+    return None
 
-if __name__ == '__main__':
-    start()       
+# print("success")
+
+# places_query = "insert into museum(id,museum name, country,)"
+
+# def start():
+
+# ''' INSERT INTO CITY (NAME, STATE) 
+#             VALUES (:name, :state) '''
+def startpy():
+    create_connection()
+
+
+if __name__== "__main__":
+    startpy()

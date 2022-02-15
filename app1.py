@@ -16,13 +16,16 @@ def create_connection():
     try:
 
         cursor= con.cursor()
-        cursor.execute("DROP TABLE IF EXISTS MUSEUM")
-        query= """CREATE TABLE MUSEUM(ID INT PRIMARY KEY NOT NULL, NAME CHAR(25) NOT NULL, COUNTRY CHAR(20) NOT NULL);"""
 
+        cursor.execute("DROP TABLE IF EXISTS DATABASE")
 
-        con.execute('''INSERT INTO MUSEUM (ID, NAME, COUNTRY) VALUES(1, 'Smithsonian Institution', 'Washington');''')
+        query= """CREATE TABLE DATABASE (ID INT PRIMARY KEY NOT NULL, NAME CHAR(25) NOT NULL, COUNTRY CHAR(20) NOT NULL);"""
 
-        con.execute('''INSERT INTO MUSEUM (ID, NAME, COUNTRY) VALUES(2, 'Le Louvre', 'Paris');''')
+        con.execute(query)
+
+        con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(1, 'Smithsonian Institution', 'Washington');''')
+
+        con.execute('''INSERT INTO DATABASE (ID, NAME, COUNTRY) VALUES(2, 'Le Louvre', 'Paris');''')
 
 
         con.commit()
@@ -36,6 +39,7 @@ def create_connection():
     
     return None
 
+
 # print("success")
 
 # places_query = "insert into museum(id,museum name, country,)"
@@ -44,6 +48,8 @@ def create_connection():
 
 # ''' INSERT INTO CITY (NAME, STATE) 
 #             VALUES (:name, :state) '''
+
+
 def startpy():
     create_connection()
 
